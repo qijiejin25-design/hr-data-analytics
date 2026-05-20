@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+  <h1 class="display-6">人事数据分析与可视化平台</h1>
+  <p class="lead">导入员工、考勤、绩效 Excel，自动完成清洗、统计、可视化与月报导出。</p>
+  <a class="btn btn-primary" href="{{ url_for('main.upload') }}">上传数据</a>
+  <a class="btn btn-outline-primary" href="{{ url_for('main.dashboard') }}">查看仪表盘（基于示例数据）</a>
+</div>
+
+<div class="card">
+  <div class="card-header">当前数据源</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">员工档案：{{ paths.employees or '未上传，使用示例' }}</li>
+    <li class="list-group-item">考勤记录：{{ paths.attendance or '未上传，使用示例' }}</li>
+    <li class="list-group-item">绩效数据：{{ paths.performance or '未上传，使用示例' }}</li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>筛选查询</h2>
+
+<form class="row g-2 mb-3" method="get">
+  <div class="col-md-3">
+    <label class="form-label">部门</label>
+    <select name="department" class="form-select">
+      <option value="">全部</option>
+      {% for d in departments %}
+        <option value="{{ d }}" {% if d == form.department %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">开始日期</label>
+    <input type="date" name="start_date" value="{{ form.start_date }}" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">结束日期</label>
+    <input type="date" name="end_date" value="{{ form.end_date }}" class="form-control">
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">员工ID</label>
+    <input type="text" name="emp_id" value="{{ form.emp_id }}" class="form-control" placeholder="如 E001">
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <button class="btn btn-primary me-2">查询</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('main.filter_view') }}">清空</a>
+  </div>
+</form>
+
+<p>共 {{ total }} 条，仅展示前 200 条：</p>
+<table class="table table-sm table-striped">
+  <thead><tr>
+    <th>员工ID</th><th>姓名</th><th>部门</th><th>日期</th>
+    <th>上班</th><th>下班</th><th>工时</th><th>状态</th>
+  </tr></thead>
+  <tbody>
+  {% for row in records %}
+    <tr>
+      <td>{{ row.emp_id }}</td><td>{{ row.name }}</td><td>{{ row.department }}</td>
+      <td>{{ row.date.strftime('%Y-%m-%d') if row.date else '' }}</td>
+      <td>{{ row.check_in }}</td><td>{{ row.check_out }}</td>
+      <td>{{ row.work_hours }}</td><td>{{ row.status }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

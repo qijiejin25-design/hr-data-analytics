@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>分析仪表盘</h2>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card chart-card"><div class="card-body">
+      <h5 class="card-title">各部门平均绩效</h5>
+      <img src="data:image/png;base64,{{ charts.dept_score }}" alt="部门绩效">
+    </div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card chart-card"><div class="card-body">
+      <h5 class="card-title">考勤状态分布</h5>
+      <img src="data:image/png;base64,{{ charts.status }}" alt="考勤状态">
+    </div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card chart-card"><div class="card-body">
+      <h5 class="card-title">月度平均工时</h5>
+      <img src="data:image/png;base64,{{ charts.att_trend }}" alt="月度考勤">
+    </div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card chart-card"><div class="card-body">
+      <h5 class="card-title">月度平均绩效</h5>
+      <img src="data:image/png;base64,{{ charts.perf_trend }}" alt="月度绩效">
+    </div></div>
+  </div>
+</div>
+
+<h4 class="mt-4">部门汇总</h4>
+<table class="table table-striped table-sm">
+  <thead><tr><th>部门</th><th>人数</th><th>平均分</th><th>最高分</th><th>最低分</th></tr></thead>
+  <tbody>
+  {% for row in dept %}
+    <tr><td>{{ row.department }}</td><td>{{ row.headcount }}</td>
+        <td>{{ row.avg_score }}</td><td>{{ row.max_score }}</td><td>{{ row.min_score }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h4 class="mt-4">Top 10 员工</h4>
+<table class="table table-striped table-sm">
+  <thead><tr><th>员工ID</th><th>姓名</th><th>部门</th><th>平均绩效</th></tr></thead>
+  <tbody>
+  {% for row in top %}
+    <tr><td>{{ row.emp_id }}</td><td>{{ row.name }}</td>
+        <td>{{ row.department }}</td><td>{{ row.avg_score }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
