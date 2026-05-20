@@ -1,5 +1,9 @@
 # 基于 Python 的人事数据分析与可视化平台
 
+[![CI](https://github.com/qijiejin25-design/hr-data-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/qijiejin25-design/hr-data-analytics/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Flask](https://img.shields.io/badge/Flask-3.0-black)
+
 一个用 Flask + pandas + matplotlib 搭建的人事数据分析小平台，支持从 Excel 导入员工、考勤、绩效数据，自动完成清洗、统计分析、图表可视化和月度报表导出。
 
 ## 功能特性
